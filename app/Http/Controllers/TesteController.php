@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class TesteController extends Controller
 {
     public function index() {
-        echo 'Olá mundo!!';
+        echo 'Olá mundo!!!!!!!!';
     }
 }
