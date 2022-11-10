@@ -1,31 +1,16 @@
-# build, test, and ftp deploy a jekyll site
-name: ci:deploy
-on:
-  push:
-    branches:
-      - master
+on: push
+name: 🚀 Deploy website on push
 jobs:
-  deploy:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
-    env:
-      BASEURL: ''
     steps:
-      - uses: actions/checkout@v2
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: install
-        run: gem install bundler && bundle
-      - name: build
-        run: bundle exec rake build
-      - name: test
-        run: bundle exec rake test
-      - name: deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: ${{secrets.FTP_SERVER}}
-          username: ${{secrets.FTP_USERNAME}}@{{secrets.FTP_SERVER}}
-          password: ${{secrets.FTP_PASSWORD}}
-          local-dir: ./_site/
+          server: ftp.bprates.com.br
+          username: star@star.bprates.com.br
+          password: ${{ secrets.ftp_password }}
