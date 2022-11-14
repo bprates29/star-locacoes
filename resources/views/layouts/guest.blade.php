@@ -12,6 +12,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/jquery-3.6.1.min.js', 'resources/js/jquery.maskedinput.min.js'])
+
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
