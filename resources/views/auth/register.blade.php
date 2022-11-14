@@ -31,7 +31,7 @@
             <div class="mt-4">
                 <x-input-label for="cpf" :value="__('CPF')" />
 
-                <x-text-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" />
+                <x-text-input data-inputmask="'mask': '999.999.999-99'" id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" />
 
                 <x-input-error :messages="$errors->get('cpf')" class="mt-2" />
             </div>
@@ -40,7 +40,7 @@
             <div class="mt-4">
                 <x-input-label for="telefone" :value="__('Telefone')" />
 
-                <x-text-input id="telefone" class="block mt-1 w-full" type="tel" name="telefone" :value="old('telefone')"
+                <x-text-input data-inputmask="'mask': '(99)99999-9999'" id="telefone" class="block mt-1 w-full" type="tel" name="telefone" :value="old('telefone')"
                               placeholder="(xx)xxxxx-xxxx" required />
 
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />

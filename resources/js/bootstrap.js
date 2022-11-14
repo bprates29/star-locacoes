@@ -8,9 +8,12 @@ window._ = _;
  */
 
 import axios from 'axios';
-import jQuery from 'jquery';
+import $ from 'jquery';
+import inputmask from "inputmask";
+
 window.axios = axios;
-window.$ = jQuery;
+window.$ = $;
+window.inputmask = inputmask;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

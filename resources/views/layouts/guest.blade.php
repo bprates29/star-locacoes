@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/jquery-3.6.1.min.js', 'resources/js/jquery.maskedinput.min.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
     <body>
