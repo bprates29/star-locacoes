@@ -16,6 +16,9 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if (auth()->user()->isAdm())
+                        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                            {{ __('Consulta Usuários') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('carros')" :active="request()->routeIs('carros')">
                             {{ __('Cadastro de Carro') }}
                         </x-nav-link>

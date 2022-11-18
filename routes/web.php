@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Usuarios\Consulta as ConsultaUsers;
 use App\Http\Livewire\Carros\Cadastro as CadastroCarros;
 use App\Http\Livewire\Motoristas\Cadastro as CadastroMotoristas;
 use App\Http\Livewire\Contratos\Cadastro as CadastroContratos;
@@ -35,6 +36,7 @@ Route::get('/dashboard', function () {
 Route::middleware([Authenticate::class])->group(function () {
 
     Route::middleware([IsAdmRole::class])->group(function () {
+        Route::get('/users', ConsultaUsers::class)->name('users');
         Route::get('/carros', CadastroCarros::class)->name('carros');
         Route::get('/motoristas', CadastroMotoristas::class)->name('motoristas');
         Route::get('/contratos', CadastroContratos::class)->name('contratos');
