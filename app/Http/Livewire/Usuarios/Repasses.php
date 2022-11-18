@@ -25,7 +25,7 @@ class Repasses extends Component
     public function render()
     {
         return view('livewire.usuarios.repasses', [
-            'repasses' => $this->repasses
+            'repasses' => $this->repasses, 'totalRepasses' => $this->totalRepasses
         ]);
     }
 
@@ -38,7 +38,9 @@ class Repasses extends Component
             ->paginate($this->paginate);
     }
 
-    public function getTotalRepasses() {
-        return $this->repasses->sum('valor_repasse');
+    public function getTotalRepassesProperty() {
+        return Transfer::join('contracts', 'contracts.id', '=', 'transfers.contract_id')
+            ->join('cars', 'cars.id', '=', 'contracts.car_id')
+            ->where('cars.id', $this->carro_id)->sum('valor_repasse');
     }
 }

@@ -28,11 +28,11 @@
                         <x-nav-link :href="route('contratos')" :active="request()->routeIs('contratos')">
                             {{ __('Cadastro de Contratos') }}
                         </x-nav-link>
-                    @else
+                    @endif
                         <x-nav-link :href="route('user.carros')" :active="request()->routeIs('user.carros')">
                             {{ __('Carros Repasse') }}
                         </x-nav-link>
-                    @endif
+
 
                 </div>
             </div>

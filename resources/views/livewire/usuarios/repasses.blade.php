@@ -77,6 +77,7 @@
                             </tbody>
                         </table>
                         {{ $repasses->links() }}
+                        Total de repasses: {{ $totalRepasses }}
                     </div>
             </div>
             </div>
