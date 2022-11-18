@@ -15,7 +15,7 @@ class Consulta extends Component
     public function render()
     {
         return view('livewire.usuarios.consulta', [
-            'users' => User::paginate(10)
+            'users' => User::orderBy('name')->paginate(10)
         ]);
     }
 }
