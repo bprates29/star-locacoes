@@ -46,8 +46,8 @@ class RegisteredUserController extends Controller
             'cpf' => $request->cpf,
             'telefone' => $request->telefone,
             'tipo' => 1,
+            'pix' => $request->pix,
         ]);
-        $user->tipo = 1;
 
         event(new Registered($user));
 

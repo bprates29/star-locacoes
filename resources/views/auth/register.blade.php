@@ -46,6 +46,15 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
+            <!-- Telefone -->
+            <div class="mt-4">
+                <x-input-label for="pix" :value="__('Pix')" />
+
+                <x-text-input id="pix" class="block mt-1 w-full" type="text" name="pix" :value="old('pix')" />
+
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Senha')" />

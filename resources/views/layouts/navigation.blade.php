@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                        <img src="{{URL::asset('mylogo.png')}}" alt="profile Pic" height="100" width="100"/>
                     </a>
                 </div>
 
@@ -15,6 +15,22 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (auth()->user()->isAdm())
+                        <x-nav-link :href="route('carros')" :active="request()->routeIs('carros')">
+                            {{ __('Cadastro de Carro') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('motoristas')" :active="request()->routeIs('motoristas')">
+                            {{ __('Cadastro de Motorista') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('contratos')" :active="request()->routeIs('contratos')">
+                            {{ __('Cadastro de Contratos') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('user.carros')" :active="request()->routeIs('user.carros')">
+                            {{ __('Carros Repasse') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 

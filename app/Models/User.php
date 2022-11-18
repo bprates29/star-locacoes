@@ -24,6 +24,7 @@ class User extends Authenticatable
         'cpf',
         'telefone',
         'tipo',
+        'pix'
     ];
 
     /**
@@ -44,4 +45,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
+
+    public function isAdm() {
+        return $this->tipo == 2;
+    }
 }

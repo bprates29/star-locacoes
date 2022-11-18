@@ -20,6 +20,7 @@ class CreateContractsTable extends Migration
             $table->date('data_inicio');
             $table->date('data_fim')->nullable();
             $table->decimal('valor_diario');
+            $table->string('obs')->nullable();
             $table->foreign('car_id')->references('id')->on('cars');
             $table->foreign('driver_id')->references('id')->on('drivers');
             $table->timestamps();

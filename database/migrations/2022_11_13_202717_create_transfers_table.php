@@ -16,10 +16,11 @@ class CreateTransfersTable extends Migration
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('contract_id');
-            $table->date('data_repasse');
-            $table->decimal('valor_repasse');
-            $table->date('data_recebimento');
-            $table->decimal('valor_recebimento');
+            $table->date('data_repasse')->nullable();
+            $table->decimal('valor_repasse')->nullable();
+            $table->date('data_recebimento')->nullable();
+            $table->decimal('valor_recebimento')->nullable();
+            $table->string('obs')->nullable();
             $table->foreign('contract_id')->references('id')->on('contracts');
             $table->timestamps();
         });

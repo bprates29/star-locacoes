@@ -47,11 +47,13 @@
                         {{ __('Esqueceu a senha?') }}
                     </a>
                 @endif
-
                 <x-primary-button class="ml-3">
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                {{ __('É novo? Clique aqui para se registrar!') }}
+            </a>
         </form>
     </x-auth-card>
 </x-guest-layout>
