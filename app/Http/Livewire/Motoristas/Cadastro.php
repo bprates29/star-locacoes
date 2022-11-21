@@ -28,9 +28,9 @@ class Cadastro extends Component
     protected $rules = [
         'motorista.name' => 'required|string',
         'motorista.cpf' => 'required|string',
-        'motorista.cnh' => 'required|string',
-        'motorista.telefone' => 'string',
-        'motorista.obs' => 'string',
+        'motorista.cnh' => 'nullable|string',
+        'motorista.telefone' => 'nullable|string',
+        'motorista.obs' => 'nullable|string',
     ];
 
     public function updated($field)

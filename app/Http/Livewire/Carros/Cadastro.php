@@ -28,13 +28,34 @@ class Cadastro extends Component
         ]);
     }
 
-    protected $rules = [
-        'car.placa' => 'required|string|max:7',
-        'car.renavan' => 'string',
-        'car.marca' => 'required|string',
-        'car.data_inicio' => 'required|date_format:Y-m-d',
-        'car.obs' => 'string',
-    ];
+    public function rules()
+    {
+        if ($this->car->id) {
+            return [
+                'car.placa' => 'required|string|max:7',
+                'car.renavan' => 'string',
+                'car.marca' => 'required|string',
+                'car.data_inicio' => 'required|date_format:Y-m-d',
+                'car.obs' => 'nullable|string',
+            ];
+        }
+        return [
+                'car.placa' => 'required|unique:cars,placa|string|max:7',
+                'car.renavan' => 'string',
+                'car.marca' => 'required|string',
+                'car.data_inicio' => 'required|date_format:Y-m-d',
+                'car.obs' => 'string',
+            ];
+    }
+
+
+    public function updated($field)
+    {
+        if ($field == 'car.placa')
+        {
+            $this->car->placa = trim($this->car->placa);
+        }
+    }
 
     public function create()
     {

@@ -17,7 +17,7 @@ class CreateDriversTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('cpf')->unique();
-            $table->string('cnh')->unique();
+            $table->string('cnh')->nullable();
             $table->string('telefone')->nullable();
             $table->string('obs')->nullable();
             $table->timestamps();
