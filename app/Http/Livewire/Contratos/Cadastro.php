@@ -18,6 +18,8 @@ class Cadastro extends Component
     public $motoristaSelec;
     public $carroSelec;
     public Contract $contrato;
+    public $searchContract;
+    private $paginate = 10;
 
     public function mount() {
         $this->contrato = new Contract();
@@ -28,8 +30,19 @@ class Cadastro extends Component
         $this->motoristas = Driver::all();
         $this->carros = Car::all();
         return view('livewire.contratos.cadastro', [
-            'contratos' => Contract::paginate(10)
+            'contratos' => $this->contractQuery->paginate($this->paginate)
         ]);
+    }
+
+    public function getContractQueryProperty()
+    {
+        $searchContract = '%' . strtoupper($this->searchContract) . '%';
+        return Contract::join('cars', 'car_id', '=', 'cars.id')->join('users', 'cars.user_id', '=', 'users.id')
+                ->where(function ($query) use ($searchContract) {
+            $query->where('placa', 'like', $searchContract)
+                ->orWhere('users.name', 'like', $searchContract);
+        })
+            ->orderBy('placa');
     }
 
     protected $rules = [

@@ -13,7 +13,14 @@
                     </div>
                 @endif
                 <div class="flex flex-col space-y-4 ...">
-                    <div wire:loading>
+                    <div class="flex justify-center space-y-3">
+                        <div class="mb-3 xl:w-96">
+                            <input type="search" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleSearch"
+                                placeholder="Procurar por nome, email ou cpf"
+                                wire:model="searchUser"/>
+                        </div>
+                    </div>
+                    <div wire:loading class="inline-block">
                         <div role="status">
                             <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

@@ -13,6 +13,8 @@ class Cadastro extends Component
 
     public $isModalOpen = 0;
     public Driver $motorista;
+    public $searchDriver;
+    private $paginate = 10;
 
     public function mount() {
         $this->motorista = new Driver();
@@ -21,8 +23,18 @@ class Cadastro extends Component
     public function render()
     {
         return view('livewire.motoristas.cadastro', [
-        'motoristas' => Driver::paginate(10)
+        'motoristas' => $this->driverQuery->paginate($this->paginate)
         ]);
+    }
+
+    public function getDriverQueryProperty()
+    {
+        $searchDriver = '%' . strtoupper($this->searchDriver) . '%';
+        return Driver::where(function ($query) use ($searchDriver) {
+            $query->where('name', 'like', $searchDriver)
+                ->orWhere('cpf', 'like', $searchDriver);
+        })
+            ->orderBy('name');
     }
 
     protected $rules = [

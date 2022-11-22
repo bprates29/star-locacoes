@@ -15,6 +15,9 @@ class Cadastro extends Component
     public $usuarios;
     public $usuarioSelec;
     public Car $car;
+    public $searchCar;
+    private $paginate = 10;
+
 
     public function mount() {
         $this->car = new Car();
@@ -24,8 +27,19 @@ class Cadastro extends Component
     {
         $this->usuarios = User::all();
         return view('livewire.carros.cadastro', [
-            'carros' => Car::paginate(10)
+            'carros' => $this->carQuery->paginate($this->paginate)
         ]);
+    }
+
+    public function getCarQueryProperty()
+    {
+        $searchCar = '%' . strtoupper($this->searchCar) . '%';
+        return Car::join('users', 'user_id', '=', 'users.id')->where(function ($query) use ($searchCar) {
+            $query->where('placa', 'like', $searchCar)
+                ->orWhere('marca', 'like', $searchCar)
+                ->orWhere('users.name', 'like', $searchCar);
+        })
+            ->orderBy('placa');
     }
 
     public function rules()
