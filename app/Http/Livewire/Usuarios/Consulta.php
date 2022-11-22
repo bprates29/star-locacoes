@@ -28,4 +28,12 @@ class Consulta extends Component
             })
             ->orderBy('name');
     }
+
+    public function updated($field)
+    {
+        if ($field == 'searchUser')
+        {
+            $this->setPage(1);
+        }
+    }
 }

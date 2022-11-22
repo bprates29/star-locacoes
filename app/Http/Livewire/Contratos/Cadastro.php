@@ -57,6 +57,10 @@ class Cadastro extends Component
         {
             $this->contrato->valor_diario = str_replace(",",".",$this->contrato->valor_diario);
         }
+        if ($field == 'searchContract')
+        {
+            $this->setPage(1);
+        }
     }
 
     public function create()

@@ -55,6 +55,10 @@ class Cadastro extends Component
         {
             $this->motorista->cpf = Manny::mask($this->motorista->cpf, "111.111.111-11");
         }
+        if ($field == 'searchDriver')
+        {
+            $this->setPage(1);
+        }
     }
 
     public function create()

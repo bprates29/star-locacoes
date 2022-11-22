@@ -50,7 +50,7 @@ class Cadastro extends Component
                 'car.renavan' => 'string',
                 'car.marca' => 'required|string',
                 'car.data_inicio' => 'required|date_format:Y-m-d',
-                'car.obs' => 'nullable|string',
+                'car.obs' => 'nullable',
             ];
         }
         return [
@@ -68,6 +68,10 @@ class Cadastro extends Component
         if ($field == 'car.placa')
         {
             $this->car->placa = trim($this->car->placa);
+        }
+        if ($field == 'searchCar')
+        {
+            $this->setPage(1);
         }
     }
 
