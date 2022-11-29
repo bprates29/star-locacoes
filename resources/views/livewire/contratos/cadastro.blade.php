@@ -39,6 +39,9 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="py-3 px-6">
+                                Nº
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 Data de inicio
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -54,6 +57,9 @@
                                 Dono do carro
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Motorista
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 Obs
                             </th>
                         </tr>
@@ -62,8 +68,11 @@
                         @foreach($contratos as $contrato)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ date("d/m/Y", strtotime($contrato->data_inicio) )}}
+                                    {{ $contrato->id }}
                                 </th>
+                                <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ date("d/m/Y", strtotime($contrato->data_inicio) )}}
+                                </td>
                                 <td class="py-4 px-6">
                                     {{$contrato->valor_diario}}
                                 </td>
@@ -77,6 +86,10 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     {{ $contrato->car->user->name }}
+                                </td>
+
+                                <td class="py-4 px-6">
+                                    {{ $contrato->driver->name }}
                                 </td>
                                 <td class="py-4 px-6">
                                     {{ $contrato->obs }}
