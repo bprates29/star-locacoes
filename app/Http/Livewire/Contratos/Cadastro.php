@@ -42,7 +42,8 @@ class Cadastro extends Component
             $query->where('placa', 'like', $searchContract)
                 ->orWhere('users.name', 'like', $searchContract);
         })
-            ->orderBy('placa');
+            ->orderBy('placa')
+            ->select('contracts.*');
     }
 
     protected $rules = [
@@ -106,7 +107,8 @@ class Cadastro extends Component
 
     public function delete($id)
     {
-        Contract::findOrFail($id)->delete();
+
+        Contract::with('transfer')->findOrFail($id)->delete();
         session()->flash('message', 'Contrato excluído!');
     }
 }

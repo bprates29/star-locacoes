@@ -30,4 +30,13 @@ class Contract extends Model
         return $this->hasMany(Transfer::class);
     }
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($contract) { // before delete() method call this
+            $contract->transfer()->delete();
+            // do the rest of the cleanup...
+        });
+    }
+
 }

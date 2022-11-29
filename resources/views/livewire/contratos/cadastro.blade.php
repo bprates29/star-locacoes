@@ -68,7 +68,9 @@
                                     {{$contrato->valor_diario}}
                                 </td>
                                 <td class="py-4 px-6">
-                                {{ date("d/m/Y", strtotime($contrato->data_fim)) }}
+                                    @isset($contrato->data_fim)
+                                        {{ date("d/m/Y", strtotime($contrato->data_fim)) }}
+                                    @endisset
                                 </td>
                                 <td class="py-4 px-6">
                                     {{ $contrato->car->placa }}

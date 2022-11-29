@@ -34,7 +34,7 @@ class Cadastro extends Component
     public function getCarQueryProperty()
     {
         $searchCar = '%' . strtoupper($this->searchCar) . '%';
-        return Car::join('users', 'user_id', '=', 'users.id')->where(function ($query) use ($searchCar) {
+        return Car::whereHas('user', function ($query) use ($searchCar) {
             $query->where('placa', 'like', $searchCar)
                 ->orWhere('marca', 'like', $searchCar)
                 ->orWhere('users.name', 'like', $searchCar);
@@ -108,6 +108,7 @@ class Cadastro extends Component
     public function edit($id)
     {
         $this->car = Car::findOrFail($id);
+
         $this->usuarioSelec = $this->car->user_id;
 
         $this->openModalPopover();
