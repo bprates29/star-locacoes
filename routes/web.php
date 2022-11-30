@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Relatorios\LocadorVeiculo;
 use App\Http\Livewire\Usuarios\Consulta as ConsultaUsers;
 use App\Http\Livewire\Carros\Cadastro as CadastroCarros;
 use App\Http\Livewire\Motoristas\Cadastro as CadastroMotoristas;
@@ -40,6 +41,7 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/carros', CadastroCarros::class)->name('carros');
         Route::get('/motoristas', CadastroMotoristas::class)->name('motoristas');
         Route::get('/contratos', CadastroContratos::class)->name('contratos');
+        Route::get('/relatorios/locadores', LocadorVeiculo::class)->name('locadores');
         Route::get('/repasses/{id}', CadastroRepasses::class)->name('repasses');
     });
 

@@ -45,7 +45,7 @@
                                 Data de inicio
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Valor diário
+                                Valor contrato
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Data de término

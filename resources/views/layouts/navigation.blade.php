@@ -28,6 +28,9 @@
                         <x-nav-link :href="route('contratos')" :active="request()->routeIs('contratos')">
                             {{ __('Cadastro de Contratos') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('locadores')" :active="request()->routeIs('locadores')">
+                            {{ __('Relatórios') }}
+                        </x-nav-link>
                     @endif
                         <x-nav-link :href="route('user.carros')" :active="request()->routeIs('user.carros')">
                             {{ __('Carros Repasse') }}
