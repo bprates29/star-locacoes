@@ -31,9 +31,10 @@ class Repasses extends Component
 
     public function getRepassesProperty()
     {
-        return Transfer::join('contracts', 'contracts.id', '=', 'transfers.contract_id')
-            ->join('cars', 'cars.id', '=', 'contracts.car_id')
-            ->where('cars.id', $this->carro_id)
+        $car_id = $this->carro_id;
+        return Transfer::whereHas('contract', function($q) use ($car_id) {
+            $q->where('car_id', '=', $car_id);
+            })
             ->orderByDesc('data_recebimento')
             ->paginate($this->paginate);
     }
