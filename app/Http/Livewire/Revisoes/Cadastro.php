@@ -150,7 +150,7 @@ class Cadastro extends Component
             $foto->pasta = 'photos';
             $foto->review_id = $this->review_id;
             $foto->save();
-            $photo->storeAs("public/".$foto->pasta, $foto->nome);
+            $photo->storeAs("public/storage/".$foto->pasta, $foto->nome);
         }
         $this->closeModalPhotosPopover();
     }
