@@ -15,7 +15,7 @@ class Reviews extends Component
         $this->carro_id = $car_id;
         $this->carro = Car::find($car_id);
         $this->reviews = Review::where("car_id", $car_id)->orderBy('data', 'DESC')->get();
-        if ($this->carro->user_id !== Auth::user()->id) {
+        if ($this->carro->user_id != Auth::user()->id) {
             $this->redirect('/');
         }
     }

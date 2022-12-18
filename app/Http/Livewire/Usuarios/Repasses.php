@@ -20,7 +20,7 @@ class Repasses extends Component
     {
         $this->carro_id = $id;
         $this->carro = Car::find($id);
-        if ($this->carro->user_id !== Auth::user()->id) {
+        if ($this->carro->user_id != Auth::user()->id) {
             $this->redirect('/');
         }
     }
