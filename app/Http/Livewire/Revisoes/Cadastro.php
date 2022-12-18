@@ -23,6 +23,7 @@ class Cadastro extends Component
     public $review;
     public $review_id;
     public $photos = [];
+    public $fotos;
 
     private $paginate = 10;
 
@@ -36,7 +37,7 @@ class Cadastro extends Component
     public function render()
     {
         return view('livewire.revisoes.cadastro', [
-            'revisoes' => $this->Revisoes, 'photos' => $this->photos
+            'revisoes' => $this->Revisoes
         ]);
     }
 
@@ -81,7 +82,7 @@ class Cadastro extends Component
     public function createPhotos($review_id)
     {
         $this->resetCreatePhotosForm();
-        $this->photos = Photo::where("review_id", $review_id)->get();
+        $this->fotos = Photo::where("review_id", $review_id)->get();
         $this->review_id = $review_id;
         $this->openModalPhotosPopover();
     }
@@ -137,6 +138,12 @@ class Cadastro extends Component
 
     public function save()
     {
+        if (isset($this->fotos)) {
+            foreach ($this->fotos as $foto) {
+                Storage::delete($foto->pasta . "/" . $foto->nome);
+                Photo::findOrFail($foto->id)->delete();
+            }
+        }
         foreach ($this->photos as $photo) {
             $foto = new Photo();
             $foto->nome = Uuid::v4();
