@@ -67,12 +67,14 @@
                                     <td class="py-4 px-6">
                                         {{ date("d/m/Y", strtotime($car->data_inicio) )}}
                                     </td>
-                                    <td class="py-4 px-6">
-                                        {{$car->obs}}
+                                    <td class="py-4 px-6" style="white-space:pre-line">
+                                            {{ trim($car->obs) }}
                                     </td>
                                     <td class="py-4 px-6">
                                         <a href="{{ route('user.repasses', $car->id) }}" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                             Consultar Repasses</a>
+                                        <a href="{{ route('user.revisoes', $car->id) }}" type="button" class="focus:outline-none text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                            Ver as revisões</a>
                                     </td>
                                 </tr>
                             @endforeach

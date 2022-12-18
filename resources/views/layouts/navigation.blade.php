@@ -33,7 +33,7 @@
                         </x-nav-link>
                     @endif
                         <x-nav-link :href="route('user.carros')" :active="request()->routeIs('user.carros')">
-                            {{ __('Carros Repasse') }}
+                            {{ __('Meus Carros') }}
                         </x-nav-link>
 
 

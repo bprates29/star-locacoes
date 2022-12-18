@@ -54,6 +54,9 @@
                                     Data de inicio
                                 </th>
                                 <th scope="col" class="py-3 px-6">
+                                    Última revisão
+                                </th>
+                                <th scope="col" class="py-3 px-6">
                                     Obs
                                 </th>
                             </tr>
@@ -74,9 +77,21 @@
                                         {{$car->marca}}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{ date("d/m/Y", strtotime($car->data_inicio) )}}
+                                        {{ date("d/m/Y", strtotime($car->data_inicio)) }}
                                     </td>
-                                    <td class="py-4 px-6">
+                                    @isset($car->review[0])
+                                        @if (strtotime("-30 days") < strtotime($car->review->sortBy('data')->last()->data))
+                                            <td class="py-4 px-6">
+                                        @else
+                                            <td class="py-4 px-6 bg-red-500/60">
+                                        @endif
+                                            <b>{{ date("d/m/Y", strtotime($car->review->sortBy('data')->last()->data)) }}</b>
+                                    @else
+                                        <td class="py-4 px-6">
+                                           S/N
+                                    @endisset
+                                    </td>
+                                    <td class="py-4 px-6" style="white-space:pre-line">
                                         {{$car->obs}}
                                     </td>
                                     <td class="py-4 px-6">
@@ -85,6 +100,8 @@
                                         <button onclick="confirm('Você tem certeza que deseja excluir esse carro? Será perdido todo o histórico de pagamentos!') || event.stopImmediatePropagation()"
                                                 wire:click="delete({{ $car->id }})" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                             Delete</button>
+                                        <a href="{{route('revisoes', $car->id)}}"  type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                            Cadastrar nova revisão</a>
                                     </td>
                                 </tr>
 

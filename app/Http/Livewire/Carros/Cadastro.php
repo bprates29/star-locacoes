@@ -39,6 +39,7 @@ class Cadastro extends Component
                 ->orWhere('marca', 'like', $searchCar)
                 ->orWhere('users.name', 'like', $searchCar);
         })
+            ->with('review')
             ->orderBy('placa');
     }
 
@@ -80,7 +81,6 @@ class Cadastro extends Component
         $this->resetCreateForm();
         $this->openModalPopover();
     }
-
     public function openModalPopover()
     {
         $this->isModalOpen = true;

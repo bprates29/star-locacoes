@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@rollup/plugin-inject": "^5.0.2",
+        "flowbite": "^1.5.5",
         "inputmask": "^5.0.7",
         "jquery": "^3.6.1"
     }

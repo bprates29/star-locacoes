@@ -29,6 +29,11 @@ class Car extends Model
         return $this->hasMany(Contract::class);
     }
 
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function driver()
     {
         return $this->belongsToMany(Driver::class, 'contracts', 'car_id', 'driver_id');

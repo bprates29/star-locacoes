@@ -35,7 +35,6 @@ class Contract extends Model
 
         static::deleting(function($contract) { // before delete() method call this
             $contract->transfer()->delete();
-            // do the rest of the cleanup...
         });
     }
 

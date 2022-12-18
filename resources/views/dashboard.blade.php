@@ -13,7 +13,7 @@
                             Bem-vindo!</span><br>
                         Escolha uma das opçoes do menu!</h1>
                     <x-responsive-nav-link :href="route('user.carros')" :active="request()->routeIs('user.carros')">
-                        {{ __('Clique aqui para consultar os repasses') }}
+                        {{ __('Clique aqui para consultar os repasses e as revisões do seu carro') }}
                     </x-responsive-nav-link>
                 </div>
             </div>
