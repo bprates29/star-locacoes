@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Revisoes;
 use App\Models\Car;
 use App\Models\Photo;
 use App\Models\Review;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -141,7 +142,11 @@ class Cadastro extends Component
         if (isset($this->fotos)) {
             foreach ($this->fotos as $foto) {
                 Storage::delete($foto->pasta . "/" . $foto->nome);
-                Photo::findOrFail($foto->id)->delete();
+                try {
+                    Photo::find($foto->id)->delete();
+                } catch (Exception $e) {
+                    echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+                }
             }
         }
         foreach ($this->photos as $photo) {
@@ -157,10 +162,7 @@ class Cadastro extends Component
 
     public function temFoto($review_id)
     {
-        if (Photo::where("review_id", $review_id)->get()->isEmpty()) {
-            return "Não";
-        }
-        return "Sim";
+        return Photo::where("review_id", $review_id)->get()->count();
     }
 
 }
