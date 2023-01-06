@@ -37,10 +37,13 @@ class Cadastro extends Component
     public function getContractQueryProperty()
     {
         $searchContract = '%' . strtoupper($this->searchContract) . '%';
-        return Contract::join('cars', 'car_id', '=', 'cars.id')->join('users', 'cars.user_id', '=', 'users.id')
+        return Contract::join('cars', 'car_id', '=', 'cars.id')
+            ->join('users', 'cars.user_id', '=', 'users.id')
+            ->join('drivers', 'driver_id', '=', 'drivers.id')
                 ->where(function ($query) use ($searchContract) {
             $query->where('placa', 'like', $searchContract)
-                ->orWhere('users.name', 'like', $searchContract);
+                ->orWhere('users.name', 'like', $searchContract)
+                ->orWhere('drivers.name', 'like', $searchContract);
         })
             ->orderBy('placa')
             ->select('contracts.*');
