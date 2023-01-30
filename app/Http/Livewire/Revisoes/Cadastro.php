@@ -54,6 +54,9 @@ class Cadastro extends Component
         'review.data' => 'date_format:Y-m-d',
         'review.km' => 'nullable',
         'review.oleo' => 'nullable',
+        'review.data_oleo' => 'nullable',
+        'review.multas' => 'nullable',
+        'review.manutencoes' => 'nullable',
         'review.obs' => 'nullable',
         'photos' => 'max:10',
         'photos.*' => 'image|max:1024', // 1MB Max

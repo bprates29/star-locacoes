@@ -62,10 +62,26 @@
                                     <dd class="text-lg font-semibold">{{ $review->km }}</dd>
                                 </div>
                                 <div class="flex flex-col pt-3">
-                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Status do óleo do
+                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Óleo do
                                         motor
                                     </dt>
                                     <dd class="text-lg font-semibold">{{ $review->oleo }}</dd>
+                                </div>
+                                <div class="flex flex-col pt-3">
+                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Data do
+                                        motor
+                                    </dt>
+                                    <dd class="text-lg font-semibold">{{ $review->data_oleo }}</dd>
+                                </div>
+                                <div class="flex flex-col pt-3">
+                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Manutenções
+                                    </dt>
+                                    <dd class="text-lg font-semibold">{{ $review->manutencoes }}</dd>
+                                </div>
+                                <div class="flex flex-col pt-3">
+                                    <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Multas
+                                    </dt>
+                                    <dd class="text-lg font-semibold">{{ $review->multas }}</dd>
                                 </div>
                                 <div class="flex flex-col pt-3">
                                     <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Observações da

@@ -42,9 +42,6 @@
                                 Nº
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Data de inicio
-                            </th>
-                            <th scope="col" class="py-3 px-6">
                                 Valor contrato
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -60,6 +57,9 @@
                                 Motorista
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Último Repasse
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 Obs
                             </th>
                         </tr>
@@ -70,9 +70,6 @@
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $contrato->id }}
                                 </th>
-                                <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ date("d/m/Y", strtotime($contrato->data_inicio) )}}
-                                </td>
                                 <td class="py-4 px-6">
                                     {{$contrato->valor_diario}}
                                 </td>
@@ -87,9 +84,20 @@
                                 <td class="py-4 px-6">
                                     {{ $contrato->car->user->name }}
                                 </td>
-
                                 <td class="py-4 px-6">
                                     {{ $contrato->driver->name }}
+                                </td>
+                                @isset($contrato->transfer[0])
+                                    @if (strtotime("-15 days") < strtotime($contrato->transfer->sortBy('data_repasse')->last()->data_repasse))
+                                        <td class="py-4 px-6">
+                                    @else
+                                        <td class="py-4 px-6 bg-red-500/60">
+                                            @endif
+                                            <b>{{ date("d/m/Y", strtotime($contrato->transfer->sortBy('data')->last()->data_repasse)) }}</b>
+                                        @else
+                                            <td class="py-4 px-6">
+                                                S/N
+                                @endisset
                                 </td>
                                 <td class="py-4 px-6">
                                     {{ $contrato->obs }}

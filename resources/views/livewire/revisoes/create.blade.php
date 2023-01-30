@@ -15,7 +15,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="exampleFormControlInput2" wire:model="review.data"
                                    placeholder="Data de inicio da inclusão"/>
-                            @error('repasse.data_recebimento') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('review.data') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="mb-4">
                             <label for="exampleFormControlInput2"
@@ -24,7 +24,7 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="exampleFormControlInput2" wire:model="review.km"
                                    placeholder="km do carro"/>
-                            @error('repasse.valor_recebimento') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('review.km') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="mb-4">
                             <label for="exampleFormControlInput2"
@@ -33,7 +33,34 @@
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    id="exampleFormControlInput2" wire:model="review.oleo"
                                    placeholder="Óleo"/>
-                            @error('repasse.data_repasse') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('review.oleo') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput2"
+                                   class="block text-gray-700 text-sm font-bold mb-2">Data óleo:</label>
+                            <input type="date"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                   id="exampleFormControlInput2" wire:model="review.data_oleo"
+                                   placeholder="Data óleo"/>
+                            @error('review.data_oleo') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput2"
+                                   class="block text-gray-700 text-sm font-bold mb-2">Manutenção:</label>
+                            <input type="text"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                   id="exampleFormControlInput2" wire:model="review.manutencoes"
+                                   placeholder="Manutenção"/>
+                            @error('review.manutencoes') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput2"
+                                   class="block text-gray-700 text-sm font-bold mb-2">Multas:</label>
+                            <input type="text"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                   id="exampleFormControlInput2" wire:model="review.multas"
+                                   placeholder="Multas"/>
+                            @error('review.multas') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="mb-4">
                             <label for="exampleFormControlInput2"
@@ -42,7 +69,7 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="exampleFormControlInput2" wire:model="review.obs"
                                 placeholder="Observações sobre o carro"></textarea>
-                            @error('repasse.obs') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('review.obs') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>

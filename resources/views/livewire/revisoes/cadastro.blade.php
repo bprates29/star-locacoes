@@ -55,7 +55,15 @@
                                 <th scope="col" class="py-3 px-6">
                                     Óleo
                                 </th>
-
+                                <th scope="col" class="py-3 px-6">
+                                    Data Óleo
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Manutenção
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Multas
+                                </th>
                                 <th scope="col" class="py-3 px-6">
                                     Fotos cadastradas
                                 </th>
@@ -75,6 +83,15 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         {{ $revisao->oleo }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ date("d/m/Y", strtotime($revisao->data_oleo)) }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ $revisao->manutencoes }}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{ $revisao->multas }}
                                     </td>
                                     <td class="py-4 px-6">
                                         {{ $this->temFoto($revisao->id) }}

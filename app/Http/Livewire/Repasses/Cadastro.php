@@ -43,7 +43,7 @@ class Cadastro extends Component
 
     public function getRepassesQueryProperty()
     {
-        return Transfer::where('contract_id', $this->contrato_id)->orderBy('data_recebimento');
+        return Transfer::where('contract_id', $this->contrato_id)->orderBy('data_repasse', 'DESC');
     }
 
     public function updated($field) {
