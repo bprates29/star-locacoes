@@ -14,9 +14,10 @@
                 @endif
                 <div class="flex flex-col space-y-4 ...">
                     <div>
-                        Olá {{auth()->user()->name}}, escolha o carro:
+                        Olá {{auth()->user()->name}}, manutenções/garagem ou todas as paradas do seu carro estão nessa página
                     </div>
                     <div wire:loading>
+                        Recuperando as manutenções/garagem para esse carro...
                         <div role="status">
                             <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -26,68 +27,65 @@
                         </div>
                     </div>
                     <div class="overflow-x-auto relative">
+                        <div class="pb-5 pt-2">
+                            <h3 class="text-3xl font-bold dark:text-white">Carro
+                                <span class="bg-blue-100 text-blue-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">
+                                    {{ $carro->marca }}</span>
+                                Placa <span class="bg-blue-100 text-blue-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">
+                                    {{ $carro->placa }}</span></h3>
+                        </div>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="py-3 px-6">
-                                    Placa
+                                    Data inicial
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Dono
+                                    Data final
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Renavan
+                                    Valor (em caso de manutenção)
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Marca
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Data de inicio
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Obs
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Consultar
+                                    Observações
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($carros as $car)
+                            @foreach($maintenances as $maintenance)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $car->placa }}
+                                        {{ date("d/m/Y", strtotime($maintenance->data_inicial)) }}
                                     </th>
                                     <td class="py-4 px-6">
-                                        {{ $car->user->name }}
+                                        {{ date("d/m/Y", strtotime($maintenance->data_final)) }}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{$car->renavan}}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{$car->marca}}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{ date("d/m/Y", strtotime($car->data_inicio) )}}
+                                        {{ $maintenance->valor }}
                                     </td>
                                     <td class="py-4 px-6" style="white-space:pre-line">
-                                            {{ trim($car->obs) }}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <a href="{{ route('user.repasses', $car->id) }}" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                            Repasses</a>
-                                        <a href="{{ route('user.revisoes', $car->id) }}" type="button" class="focus:outline-none text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                            Revisões</a>
-                                        <a href="{{ route('user.manutencao', $car->id) }}" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                            Manutenções/Garagem</a>
+                                        {{ $maintenance->obs }}
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $carros->links() }}
                     </div>
                 </div>
+                <section class="overflow-hidden text-gray-700 float-right">
+                    <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
+                        <a href="{{route('user.carros')}}" type="button"
+                           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Voltar para meus carros
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor"
+                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     </div>

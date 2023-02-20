@@ -13,10 +13,8 @@
                     </div>
                 @endif
                 <div class="flex flex-col space-y-4 ...">
-                    <div>
-                        Olá {{auth()->user()->name}}, escolha o carro:
-                    </div>
                     <div wire:loading>
+                        Recuperando as manutenções e paradas para esse carro...
                         <div role="status">
                             <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -26,66 +24,66 @@
                         </div>
                     </div>
                     <div class="overflow-x-auto relative">
+                        <div class="pb-5 pt-2">
+                            <h3 class="text-3xl font-bold dark:text-white">Carro
+                                <span class="bg-blue-100 text-blue-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">
+                                    {{ $carro->marca }}</span>
+                                Placa <span class="bg-blue-100 text-blue-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">
+                                    {{ $carro->placa }}</span></h3>
+                        </div>
+
+                        <div>
+                            <button wire:click="create()" type="button" class="space-x-52 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                Adicionar Manutenção/Garagem
+                            </button>
+                        </div>
+                        @if($isModalOpen)
+                            @include('livewire.manutencao.create')
+                        @endif
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="py-3 px-6">
-                                    Placa
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Dono
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Renavan
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Marca
-                                </th>
-                                <th scope="col" class="py-3 px-6">
                                     Data de inicio
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Data final
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Valor das despesas
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     Obs
                                 </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Consultar
-                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($carros as $car)
+                            @foreach($manutencoes as $manutencao)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $car->placa }}
+                                        {{ date("d/m/Y", strtotime($manutencao->data_inicial)) }}
                                     </th>
                                     <td class="py-4 px-6">
-                                        {{ $car->user->name }}
+                                        {{ date("d/m/Y", strtotime($manutencao->data_final)) }}
                                     </td>
                                     <td class="py-4 px-6">
-                                        {{$car->renavan}}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{$car->marca}}
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        {{ date("d/m/Y", strtotime($car->data_inicio) )}}
+                                        {{ $manutencao->valor }}
                                     </td>
                                     <td class="py-4 px-6" style="white-space:pre-line">
-                                            {{ trim($car->obs) }}
+                                        {{ $manutencao->obs }}
                                     </td>
                                     <td class="py-4 px-6">
-                                        <a href="{{ route('user.repasses', $car->id) }}" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                            Repasses</a>
-                                        <a href="{{ route('user.revisoes', $car->id) }}" type="button" class="focus:outline-none text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                            Revisões</a>
-                                        <a href="{{ route('user.manutencao', $car->id) }}" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                            Manutenções/Garagem</a>
+                                        <button wire:click="edit({{ $manutencao->id }})" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                            Edit</button>
+                                        <button onclick="confirm('Você tem certeza que deseja excluir essa manutenção/garagem?') || event.stopImmediatePropagation()"
+                                                wire:click="delete({{ $manutencao->id }})" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $carros->links() }}
+                        {{ $manutencoes->links() }}
                     </div>
                 </div>
             </div>

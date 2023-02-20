@@ -16,8 +16,9 @@ class CreateMaintenancesTable extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('car_id');
-            $table->date('data');
-            $table->decimal('valor', 8, 2);
+            $table->date('data_inicial');
+            $table->date('data_final');
+            $table->decimal('valor', 8, 2)->nullable();
             $table->longText('obs')->nullable();
             $table->foreign('car_id')->references('id')->on('cars');
             $table->timestamps();

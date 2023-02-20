@@ -101,7 +101,9 @@
                                                 wire:click="delete({{ $car->id }})" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                             Delete</button>
                                         <a href="{{route('revisoes', $car->id)}}"  type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                            Cadastrar nova revisão</a>
+                                            Cadastrar Revisão</a>
+                                        <a href="{{route('manutencao', $car->id)}}"  type="button" class="text-gray-600 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                            Cadastrar Manutenção</a>
                                     </td>
                                 </tr>
 
